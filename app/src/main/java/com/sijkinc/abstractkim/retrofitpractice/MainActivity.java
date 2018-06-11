@@ -9,6 +9,8 @@ import com.sijkinc.abstractkim.retrofitpractice.CrytoCompare.CrytoCompareApi;
 import com.sijkinc.abstractkim.retrofitpractice.CrytoCompare.CrytoCompareApiRxJava;
 import com.sijkinc.abstractkim.retrofitpractice.CrytoCompare.CrytoCompareService;
 import com.sijkinc.abstractkim.retrofitpractice.CrytoCompare.ExcuteForResponse;
+import com.sijkinc.abstractkim.retrofitpractice.CrytoCompare.News.LatestNewsArticles.LatestNewsArticles;
+import com.sijkinc.abstractkim.retrofitpractice.CrytoCompare.News.ListNewsFeeds.ListNewsFeeds;
 import com.sijkinc.abstractkim.retrofitpractice.CrytoCompare.Price.MultipleSymbolPrice.MultipleSymbolPrice;
 import com.sijkinc.abstractkim.retrofitpractice.CrytoCompare.Price.SingleSymbolPrice.SingleSymbolPrice;
 import com.sijkinc.abstractkim.retrofitpractice.CrytoCompare.Toplists.ByPairVolume.TopListByPairVolume;
@@ -119,11 +121,32 @@ public class MainActivity extends AppCompatActivity {
 //                .observeOn(AndroidSchedulers.mainThread())
 //                .subscribe(singleSymbolPrice -> Log.d(TAG, "RXJAVA--> " + singleSymbolPrice.toString()));
 
-        Observable<MultipleSymbolPrice> observableMultipleSymbolPrice = apiRxJava.multipleSymbolPrice("BTC,ETH", "USD,EUR,JPY", null, null,null, null);
-        final Disposable subscribe = observableMultipleSymbolPrice
+//        Observable<MultipleSymbolPrice> observableMultipleSymbolPrice = apiRxJava.multipleSymbolPrice("BTC,ETH", "USD,EUR,JPY", null, null,null, null);
+//        observableMultipleSymbolPrice
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(multipleSymbolPrice -> Log.d(TAG, "RXJAVA--> " + multipleSymbolPrice.toString()));
+
+//        Observable<ListNewsFeeds> observableListNewsFeeds = apiRxJava.listNewsFeeds(null, null);
+//        final Disposable subscribe = observableListNewsFeeds
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(listNewsFeeds -> Log.d(TAG, "RXJAVA--> " + listNewsFeeds.toString()));
+
+//        CrytoCompareService.requestAndConsume(api.listNewsFeeds(null, null),
+//                response -> Log.d(TAG, "Nanma listNewsFeeds -->" + response.body().toString()),
+//                t-> Log.d(TAG, t.toString()));
+
+
+         Observable<LatestNewsArticles> observableLatestNewsArticles = apiRxJava.latestNewsArticles(null, null, null, null, "EN", null, null, null);
+         final Disposable subscribe = observableLatestNewsArticles
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(multipleSymbolPrice -> Log.d(TAG, "RXJAVA--> " + multipleSymbolPrice.toString()));
+                .subscribe(latestNewsArticles -> Log.d(TAG, "RXJAVA--> " + latestNewsArticles.toString()));
+
+//        CrytoCompareService.requestAndConsume(api.latestNewsArticles(null, null, null, null, "EN", null, null, null),
+//                response -> Log.d(TAG, "Nanma latestNewsArticles -->" + response.body().toString()),
+//                t-> Log.d(TAG, t.toString()));
     }
 
 

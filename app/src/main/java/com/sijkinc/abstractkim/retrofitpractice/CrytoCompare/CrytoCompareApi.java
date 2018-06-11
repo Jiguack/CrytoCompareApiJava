@@ -1,5 +1,7 @@
 package com.sijkinc.abstractkim.retrofitpractice.CrytoCompare;
 
+import com.sijkinc.abstractkim.retrofitpractice.CrytoCompare.News.LatestNewsArticles.LatestNewsArticles;
+import com.sijkinc.abstractkim.retrofitpractice.CrytoCompare.News.ListNewsFeeds.ListNewsFeeds;
 import com.sijkinc.abstractkim.retrofitpractice.CrytoCompare.Price.MultipleSymbolPrice.MultipleSymbolPrice;
 import com.sijkinc.abstractkim.retrofitpractice.CrytoCompare.Price.SingleSymbolPrice.SingleSymbolPrice;
 import com.sijkinc.abstractkim.retrofitpractice.CrytoCompare.Toplists.ByPairVolume.TopListByPairVolume;
@@ -147,4 +149,38 @@ public interface CrytoCompareApi {
                                                   @Query("e")String e,
                                                   @Query("extraParams") String extraParams,
                                                   @Query("Sign") Boolean sign);
+
+    /**********************************************************************************************
+     * News APi
+     */
+
+    /**
+     * Returns news articles from the providers that CryptoCompare has integrated with.
+     *  - @param feeds  Specific news feeds to retrieve news from [Max character length: 400]
+     *  - @param categories  	Category of news articles to return [Max character length: 400]
+     *  - @param excludeCategories  	News article categories to exclude from results [Max character length: 400]
+     *  - @param lTs  Returns news before that timestamp
+     *  - @param sortOrder  The order to return news articles - latest or popular [Max character length: 8]
+     *  - @param extraParams  The name of your application (we recommend you send it) [Max character length: 50]
+     *  - @param sign  If set to true, the server will sign the requests (be default we don't sign them), this is useful for usage in smart contracts
+     */
+    @GET("data/v2/news/")
+    Call<LatestNewsArticles> latestNewsArticles(@Query("feeds") String feeds,
+                                                 @Query("categories") String categories,
+                                                 @Query("excludeCategories") String excludeCategories,
+                                                 @Query("lTs") Boolean its,
+                                                 @Query("lang")String lang,
+                                                 @Query("sortOrder") String sortOrder,
+                                                 @Query("extraParams") String extraParams,
+                                                 @Query("Sign") Boolean sign);
+
+    /**
+     * Returns all the news feeds (providers) that CryptoCompare has integrated with.
+     *  - @param extraParams  Thee name of your application (we recommend you send it) [Max character length: 50]
+     *  - @param sign  If set to true, the server will sign the requests (be default we don't sign them), this is useful for usage in smart contracts
+     */
+    @GET("data/news/feeds")
+    Call<ListNewsFeeds> listNewsFeeds(@Query("extraParams") String extraParams,
+                                      @Query("Sign") Boolean sign);
+
 }
