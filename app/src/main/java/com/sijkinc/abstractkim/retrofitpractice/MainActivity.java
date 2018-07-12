@@ -38,9 +38,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        listView = (ListView) findViewById(R.id.lvRepo);
-
         /**
          * Retrofit Builder Part
          *   - add base url
@@ -48,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
          *
          *   get an interface for request as client
          */
-        CrytoCompareApi api = CrytoCompareService.getCrytoCompareApi();
-        CrytoCompareApiRxJava apiRxJava = CrytoCompareService.getCrytoCompareApiRxJava();
+//        CrytoCompareApi api = CrytoCompareService.getCrytoCompareApi();
+//        CrytoCompareApiRxJava apiRxJava = CrytoCompareService.getCrytoCompareApiRxJava();
 
 //        /**
 //         * Using Generic Method
@@ -150,17 +147,24 @@ public class MainActivity extends AppCompatActivity {
 //                response -> Log.d(TAG, "Nanma latestNewsArticles -->" + response.body().toString()),
 //                t-> Log.d(TAG, t.toString()));
 
-        Observable.create(e->{
-            try {
-                e.onNext(0);
-                e.onComplete();
-            }catch (Throwable t){
-                e.onError(t);
-            }
-        }).subscribe(i-> Log.d(TAG, "onNext()" + i),
-                     t-> Log.d(TAG, "onError()" + t),
-                     ()-> Log.d(TAG, "onComplete()")
-        );
+//        Observable.create(e->{
+//            try {
+//                e.onNext(0);
+//                e.onComplete();
+//            }catch (Throwable t){
+//                e.onError(t);
+//            }
+//        }).subscribe(i-> Log.d(TAG, "onNext()" + i),
+//                     t-> Log.d(TAG, "onError()" + t),
+//                     ()-> Log.d(TAG, "onComplete()")
+//        );
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.container, new CoinListFragment())
+                    .commit();
+        }
     }
 
 

@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">retrofit practice</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="coinlist_app_name">COINs</string>
+    <string name="coin_title">Title</string>
+    <string name="coin_description">Description</string>
+    <string name="coin_price">Price</string>
+    <string name="coin_change24hour">Change</string>
+
 </resources>
