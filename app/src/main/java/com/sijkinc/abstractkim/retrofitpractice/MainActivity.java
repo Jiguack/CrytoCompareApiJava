@@ -1,5 +1,6 @@
 package com.sijkinc.abstractkim.retrofitpractice;
 
+import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private final String TAG = "PeterLuke";
     private ListView listView;
 
+    @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,15 +140,27 @@ public class MainActivity extends AppCompatActivity {
 //                t-> Log.d(TAG, t.toString()));
 
 
-         Observable<LatestNewsArticles> observableLatestNewsArticles = apiRxJava.latestNewsArticles(null, null, null, null, "EN", null, null, null);
+/*         Observable<LatestNewsArticles> observableLatestNewsArticles = apiRxJava.latestNewsArticles(null, null, null, null, "EN", null, null, null);
          final Disposable subscribe = observableLatestNewsArticles
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(latestNewsArticles -> Log.d(TAG, "RXJAVA--> " + latestNewsArticles.toString()));
+                .subscribe(latestNewsArticles -> Log.d(TAG, "RXJAVA--> " + latestNewsArticles.toString()));*/
 
 //        CrytoCompareService.requestAndConsume(api.latestNewsArticles(null, null, null, null, "EN", null, null, null),
 //                response -> Log.d(TAG, "Nanma latestNewsArticles -->" + response.body().toString()),
 //                t-> Log.d(TAG, t.toString()));
+
+        Observable.create(e->{
+            try {
+                e.onNext(0);
+                e.onComplete();
+            }catch (Throwable t){
+                e.onError(t);
+            }
+        }).subscribe(i-> Log.d(TAG, "onNext()" + i),
+                     t-> Log.d(TAG, "onError()" + t),
+                     ()-> Log.d(TAG, "onComplete()")
+        );
     }
 
 
